@@ -175,6 +175,7 @@
                 allDiv[i].insertBefore(photo,allDiv[i].firstChild);
                 all9s[i].innerText=v1.images[i].id;
               }
+              tempAlert();
                 
             })
 
@@ -182,6 +183,15 @@
         .catch(err => {
 	        console.log(err);
         });
+    }
+    function tempAlert(){
+      var el = document.createElement("div");
+      el.setAttribute("style","position:absolute;top:40%;left:35%;background-color:red;border: 5px solid black;text-align:center; height:200px; width:500px;");
+      el.innerHTML = "<div style='position:absolute;top:40%;left:40%;font-weight:bold;'>9 Images loaded</div>";
+      document.body.appendChild(el);
+      setTimeout(function(){
+      el.parentNode.removeChild(el);
+      },5000);
     }
   </script>
   <header>
