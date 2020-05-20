@@ -94,6 +94,44 @@
 </head>
 
 <body>
+  <script>
+    window.onload=function(){
+      document.getElementsByClassName("btn-secondary")[0].addEventListener("click", secondaryImages);
+    }
+    function secondaryImages(){
+        let searchRes=" http://www.splashbase.co/api/v1/images/search?query=cities";
+        
+        fetch(searchRes, {
+	    "method": "GET"
+        })
+        .then(response => {
+            response.json()
+            .then(v1=>{
+              console.log(v1);
+              let allSvg=document.querySelectorAll(".album .row .col-md-4 svg");
+              let allDiv=document.querySelectorAll(".album .row .col-md-4 .shadow-sm");
+              for (let i=0;i<allSvg.length; i++){
+                allSvg[i].remove();
+                let photo=document.createElement('img');
+                photo.src=v1.images[i].url;
+                photo.className="bd-placeholder-img card-img-top";
+                photo.style.height="225px";
+                photo.style.width="100%";
+                photo.style.objectFit="cover";
+                photo.focusable="false";
+                photo.preserveAspectRatio="xMidYMid slice";
+                photo.role="img";
+                allDiv[i].insertBefore(photo,allDiv[i].firstChild);
+              }
+                
+            })
+
+            })
+        .catch(err => {
+	        console.log(err);
+        });
+    }
+  </script>
   <header>
     <div class="collapse bg-dark" id="navbarHeader">
       <div class="container">
