@@ -135,6 +135,18 @@
   <script>
     window.onload=function(){
       document.getElementsByClassName("btn-secondary")[0].addEventListener("click", secondaryImages);
+      let editButtons=document.querySelectorAll(".btn-outline-secondary:nth-child(2)");
+      for (let j=0;j<editButtons.length; j++){
+        editButtons[j].addEventListener("click", changeButton);
+      }
+    }
+    function changeButton(event){
+      let hideButton=document.createElement("button");
+      hideButton.type="button"; 
+      hideButton.className="btn btn-sm btn-outline-secondary";
+      hideButton.innerText="Hide";
+      event.currentTarget.closest(".btn-group").appendChild(hideButton);
+      let myButton=event.currentTarget.remove();
     }
     function secondaryImages(){
         let searchRes=" http://www.splashbase.co/api/v1/images/search?query=cities";
@@ -148,6 +160,7 @@
               console.log(v1);
               let allSvg=document.querySelectorAll(".album .row .col-md-4 svg");
               let allDiv=document.querySelectorAll(".album .row .col-md-4 .shadow-sm");
+              let all9s=document.querySelectorAll(".card-body small");
               for (let i=0;i<allSvg.length; i++){
                 allSvg[i].remove();
                 let photo=document.createElement('img');
@@ -160,6 +173,7 @@
                 photo.preserveAspectRatio="xMidYMid slice";
                 photo.role="img";
                 allDiv[i].insertBefore(photo,allDiv[i].firstChild);
+                all9s[i].innerText=v1.images[i].id;
               }
                 
             })
